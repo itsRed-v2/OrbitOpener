@@ -1,0 +1,130 @@
+:root {
+    --glass-border: solid 1px rgba(200, 200, 200, 0.8);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-size: cover;
+
+    user-select: none;
+}
+
+#loading-screen {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+    display: grid;
+    place-items: center;
+
+    background-color: #9fA2B2;
+}
+
+#loading-screen img {
+    height: 200px;
+    width: 200px;
+}
+
+.header {
+    height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    
+    text-align: center;
+    text-shadow: 0 0 5px black;
+
+    background-color: #2E4756B3;
+    box-shadow: black 0 0 10px;
+    backdrop-filter: blur(10px);
+
+    -webkit-app-region: drag;
+}
+
+.titlebar-area {
+    width: env(titlebar-area-width);
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.titlebar-area img {
+    height: 100%;
+    padding: 10px;
+    padding-right: 0;
+    box-sizing: border-box;
+}
+
+.title {
+    margin: 0;
+    padding-left: 10px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+}
+
+#app-container {
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.app-button {
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 15px;
+    border: var(--glass-border);
+
+    box-shadow: 0 0 10px black;
+}
+
+.app-button span {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 10px;
+    box-sizing: border-box;
+
+    font-size: larger;
+    text-shadow: 0 0 5px black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: translateY(100px);
+}
+
+.app-button img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.glass {
+    background-color: rgba(200, 200, 200, 0.5);
+    backdrop-filter: blur(5px);
+}
