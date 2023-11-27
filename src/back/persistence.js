@@ -1,21 +1,7 @@
 const { app } = require('electron');
 const fsPromises = require('fs/promises');
 const fs = require('fs');
-const path = require('node:path');
-
-function getDataPath() {
-    const environmentPath = app.isPackaged ? path.dirname(app.getPath('exe')) : app.getAppPath();
-    return path.join(environmentPath, 'data');
-}
-
-function pathToPosix(pathStr) {
-    return pathStr.split(path.sep).join(path.posix.sep);
-}
-
-async function readJson(filePath) {
-    const jsonString = await fsPromises.readFile(filePath, 'utf-8');
-    return JSON.parse(jsonString);
-}
+const path = require('path');
 
 async function getApplications() {
     const applicationsPath = path.join(getDataPath(), 'applications.json');
@@ -26,8 +12,30 @@ async function getApplications() {
     return applications;
 }
 
-async function readFile(filePath) {
+async function readJson(filePath) {
+    let data;
+    try {
+        data = await readFileText(filePath);
+    } catch (err) {
+        if (err.code !== 'ENOENT') throw err;
+        await createEmptyJsonFile(filePath);
+        data = await readFileText(filePath);
+    }
+
+    return JSON.parse(data);
+}
+
+async function readFileText(filePath) {
     return await fsPromises.readFile(filePath, 'utf-8');
+}
+
+async function createEmptyJsonFile(filePath) {
+    await writeFileText(filePath, '{}');
+}
+
+async function writeFileText(filePath, text) {
+    await fsPromises.mkdir(path.dirname(filePath), { recursive: true });
+    await fsPromises.writeFile(filePath, text, 'utf-8');
 }
 
 function getIconPath(iconName) {
@@ -45,9 +53,17 @@ function getBackgroundPath() {
     return pathToPosix(bgPath);
 }
 
+function pathToPosix(pathStr) {
+    return pathStr.split(path.sep).join(path.posix.sep);
+}
+
+function getDataPath() {
+    const environmentPath = app.isPackaged ? path.dirname(app.getPath('exe')) : app.getAppPath();
+    return path.join(environmentPath, 'data');
+}
+
 module.exports = {
     getApplications,
     getDataPath,
-    readFile,
     getBackgroundPath
 };
