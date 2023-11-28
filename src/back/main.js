@@ -51,7 +51,7 @@ function createWindow() {
         },
         backgroundColor: '#9fA2B2',
         webPreferences: {
-            preload: path.join(__dirname, '\\..\\front\\preload.js')
+            preload: path.join(__dirname, '\\..\\front\\src\\preload.js')
         }
     });
 
