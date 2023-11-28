@@ -28,8 +28,8 @@ body {
 }
 
 #loading-screen img {
-    height: 200px;
-    width: 200px;
+    max-height: 200px;
+    max-width: 200px;
 }
 
 .header {
@@ -83,6 +83,11 @@ body {
     flex-wrap: wrap;
 }
 
+.app-button-placeholder {
+    height: 100px;
+    width: 100px;
+}
+
 .app-button {
     height: 100px;
     width: 100px;
@@ -127,4 +132,12 @@ body {
 .glass {
     background-color: rgba(200, 200, 200, 0.5);
     backdrop-filter: blur(5px);
+}
+
+.absolute-app-container {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
 }

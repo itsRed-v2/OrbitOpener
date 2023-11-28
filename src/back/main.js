@@ -16,17 +16,17 @@ app.whenReady().then(async () => {
     // Registering IPC channels handling
     ipcMain.handle('getApplications', () => applications);
 
-    ipcMain.handle('runApplication', (event, appKey) => {
+    ipcMain.on('runApplication', (event, appKey) => {
         const application = applications[appKey];
-        if (!application?.executable) return false;
+        if (!application?.executable) return;
         
         if (app.isPackaged)
             runExecutable(application.executable);
         else
             console.log('Running application:', appKey);
-
-        return true;
     });
+
+    ipcMain.on('quit', () => app.quit());
 
     ipcMain.handle('getBackgroundPath', getBackgroundPath);
 
