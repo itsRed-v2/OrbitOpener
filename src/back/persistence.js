@@ -39,7 +39,7 @@ async function writeFileText(filePath, text) {
 }
 
 function getIconPath(iconName) {
-    for (const ext of ['png', 'svg', 'svg']) {
+    for (const ext of ['png', 'svg', 'svg', 'ico']) {
         const iconPath = path.join(getDataPath(), 'assets', 'icons', `${iconName}.${ext}`);
         if (fs.existsSync(iconPath)) {
             return iconPath;
